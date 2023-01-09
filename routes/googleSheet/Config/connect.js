@@ -14,7 +14,7 @@ let init = async (sheetCode) => {
 };
 
 const create = async () => {
-    const title = "테스트시트";
+    const title = "EZSTEAM 데이터 분석";
     const auth = jwt;
     const service = google.sheets({ version: "v4", auth });
     const resource = {
