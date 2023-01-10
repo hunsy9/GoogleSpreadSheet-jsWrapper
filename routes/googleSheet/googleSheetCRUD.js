@@ -12,22 +12,19 @@ const makeNewMemberSheet = async (doc) => {
 };
 
 //write Parameter = {sheetCode, cellRange, JsonData}
-const addDataToSpreadSheet = async (sheetCode, cellRange, data) => {
+const addDataToSpreadSheet = async (sheetCode, startPos, data) => {
     return new Promise(async (resolve, reject) => {
         const sheets = google.sheets({ version: "v4", auth: jwt });
-
-        console.log("data", data);
 
         sheets.spreadsheets.values.update(
             {
                 includeValuesInResponse: true,
                 spreadsheetId: sheetCode,
-                range: "A2",
+                range: startPos,
                 valueInputOption: "RAW",
                 requestBody: {
-                    range: "A2",
-                    values: data
-                }
+                    values: data,
+                },
             },
             (err, result) => {
                 if (err) {

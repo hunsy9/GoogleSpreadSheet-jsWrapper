@@ -9,7 +9,7 @@ const { init, create } = require("./Config/connect");
 //parameter {option}
 router.post("/crud", async (req, res, next) => {
     const option = req.query.option;
-    const { sheetCode, cellRange, data } = req.body;
+    const { sheetCode, startPos, data } = req.body;
     switch (option) {
         case "create":
             const generatedSheetId = await create();
@@ -20,9 +20,7 @@ router.post("/crud", async (req, res, next) => {
             });
             break;
         case "write":
-            console.log("접속");
-            // const spreadSheet = await init(sheetCode);
-            await addDataToSpreadSheet(sheetCode, cellRange, data)
+            await addDataToSpreadSheet(sheetCode, startPos, data)
                 .then(() => {
                     res.send("성공");
                 })
