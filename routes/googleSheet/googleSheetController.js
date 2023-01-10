@@ -10,6 +10,7 @@ const logger = require("./../../logConfig/logConfig");
 
 //parameter {option}
 router.post("/crud", apiLimiter, async (req, res, next) => {
+    res.setHeader("Access-Control-Allow-Origin", "*");
     const option = req.query.option;
     const { sheetCode, startPos, data } = req.body;
     switch (option) {
