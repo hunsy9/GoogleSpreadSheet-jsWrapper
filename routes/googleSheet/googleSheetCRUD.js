@@ -2,11 +2,23 @@ const { json } = require("body-parser");
 const { google } = require("googleapis");
 const fs = require("fs");
 const jwt = require("./Config/initialFunc");
+const backOff = require("exponential-backoff");
+const logger = require("../../logConfig/logConfig");
+const { rejects } = require("assert");
 
 //create parameters = {doc,sheetId}
-const makeNewMemberSheet = async (doc) => {
+const makeNewMemberSheet = async (doc, generatedSheetId) => {
     return new Promise(async (resolve, reject) => {
-        const newSheet = await doc.addSheet();
+        const newSheet = await doc.addSheet(async (err) => {
+            if (err) {
+                logger.error("/POST:CREATE    |     " + err.message);
+                reject(err);
+            } else {
+                const newSheet = await doc.addSheet();
+                resolve(newSheet);
+                logger.info("CREATE 처리완료 SheetID: " + generatedSheetId);
+            }
+        });
         resolve(newSheet);
     });
 };
@@ -29,35 +41,20 @@ const addDataToSpreadSheet = async (sheetCode, startPos, data) => {
             (err, result) => {
                 if (err) {
                     // Handle error
-                    console.log(err);
+                    logger.error(
+                        '/POST:WRITE , sheetID: "' +
+                            sheetCode +
+                            '"   |    ' +
+                            err.message
+                    );
+
+                    reject(err);
                 } else {
-                    console.log("result", result);
+                    logger.info("WRITE 처리완료 SheetID: " + sheetCode);
+                    resolve(result);
                 }
             }
         );
-
-        // const sheet = await spreadSheet.sheetsByIndex[0];
-        // const { startRowIndex, endRowIndex, startColumnIndex, endColumnIndex } =
-        //     cellRange;
-
-        // await sheet.loadCells({
-        //     startRowIndex: startRowIndex,
-        //     endRowIndex: endRowIndex,
-        //     startColumnIndex: startColumnIndex,
-        //     endColumnIndex: endColumnIndex,
-        // });
-        // console.log("셀 로드 성공");
-
-        // for (let i = startRowIndex; i < endRowIndex; i++) {
-        //     for (let j = startColumnIndex; j < endColumnIndex; j++) {
-        //         let a = i - startRowIndex;
-        //         let b = j - startColumnIndex;
-        //         sheet.getCell(i, j).value = jsonData[a][b];
-        //     }
-        // }
-
-        // await sheet.saveUpdatedCells();
-        resolve();
     });
 };
 

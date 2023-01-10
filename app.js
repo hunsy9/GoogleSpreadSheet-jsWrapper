@@ -14,12 +14,12 @@ const serviceRouter = require("./routes/service");
 app.set("views", "./views");
 app.set("view engine", "ejs");
 app.engine("ejs", require("ejs").__express);
-
 app.use(
     cors({
         origin: "*",
     })
 );
+// app.use(rateLimit());
 app.use(logger("dev"));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -28,7 +28,6 @@ app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/service", serviceRouter);
 app.get("/", (req, res) => {
-    // res.render("index", { title: "hi"
     res.send("Welcome");
 });
 

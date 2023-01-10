@@ -51,6 +51,7 @@ const create = async () => {
         });
         return spreadsheet.data.spreadsheetId;
     } catch (err) {
+        logger.error("/POST:CREATE " + err.message);
         throw err;
     }
 };

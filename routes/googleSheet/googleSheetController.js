@@ -5,9 +5,11 @@ const {
     addDataToSpreadSheet,
 } = require("./googleSheetCRUD");
 const { init, create } = require("./Config/connect");
+const { apiLimiter } = require("./ApiLimitation/rateLimit");
+const logger = require("./../../logConfig/logConfig");
 
 //parameter {option}
-router.post("/crud", async (req, res, next) => {
+router.post("/crud", apiLimiter, async (req, res, next) => {
     const option = req.query.option;
     const { sheetCode, startPos, data } = req.body;
     switch (option) {
@@ -15,18 +17,14 @@ router.post("/crud", async (req, res, next) => {
             const generatedSheetId = await create();
             const doc = await init(generatedSheetId);
 
-            await makeNewMemberSheet(doc).then(() => {
+            await makeNewMemberSheet(doc, generatedSheetId).then(() => {
                 res.send(generatedSheetId);
             });
             break;
         case "write":
-            await addDataToSpreadSheet(sheetCode, startPos, data)
-                .then(() => {
-                    res.send("성공");
-                })
-                .catch(() => {
-                    res.send("write 도중 오류가 발생했습니다.");
-                });
+            await addDataToSpreadSheet(sheetCode, startPos, data).then(() => {
+                res.send("성공");
+            });
             break;
     }
 });
