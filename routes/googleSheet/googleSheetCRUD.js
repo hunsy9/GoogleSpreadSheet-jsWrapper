@@ -6,7 +6,7 @@ const jwt = require("./Config/initialFunc");
 //create parameters = {doc,sheetId}
 const makeNewMemberSheet = async (doc, generatedSheetId) => {
     return new Promise(async (resolve, reject) => {
-        const newSheet = await doc.addSheet(async (err) => {
+        const newSheet = await doc.addSheet(async (err, generatedSheetId) => {
             if (err) {
                 logger.error("/POST:CREATE    |     " + err.message);
                 reject(err);
@@ -35,7 +35,7 @@ const addDataToSpreadSheet = async (sheetCode, startPos, data) => {
                     values: data,
                 },
             },
-            (err, result) => {
+            (err, result, sheetCode) => {
                 if (err) {
                     // Handle error
                     logger.error(
@@ -47,7 +47,7 @@ const addDataToSpreadSheet = async (sheetCode, startPos, data) => {
 
                     reject(err);
                 } else {
-                    // logger.info("WRITE 처리완료 SheetID: " + sheetCode);
+                    logger.info("WRITE 처리완료 SheetID: " + sheetCode);
                     resolve(result);
                 }
             }
