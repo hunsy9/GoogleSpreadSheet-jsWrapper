@@ -25,7 +25,9 @@ const addDataToSpreadSheet = async (sheetCode, cellRange, data) => {
                 range: "Sheet1!A1:A3",
                 valueInputOption: "RAW",
                 insertDataOption: "OVERWRITE",
-                values: data,
+                requestBody: {
+                    values: data
+                }
             },
             (err, result) => {
                 if (err) {
