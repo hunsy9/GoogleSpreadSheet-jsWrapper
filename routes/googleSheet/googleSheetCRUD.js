@@ -16,16 +16,16 @@ const addDataToSpreadSheet = async (sheetCode, cellRange, data) => {
     return new Promise(async (resolve, reject) => {
         const sheets = google.sheets({ version: "v4", auth: jwt });
 
-        // const resource = {
-        //     jsonData,
-        // };
-        sheets.spreadsheets.values.append(
+        console.log("data", data);
+
+        sheets.spreadsheets.values.update(
             {
+                includeValuesInResponse: true,
                 spreadsheetId: sheetCode,
-                range: "Sheet1!A1:A3",
+                range: "A2",
                 valueInputOption: "RAW",
-                insertDataOption: "OVERWRITE",
                 requestBody: {
+                    range: "A2",
                     values: data
                 }
             },
@@ -34,7 +34,7 @@ const addDataToSpreadSheet = async (sheetCode, cellRange, data) => {
                     // Handle error
                     console.log(err);
                 } else {
-                    console.log(result);
+                    console.log("result", result);
                 }
             }
         );
