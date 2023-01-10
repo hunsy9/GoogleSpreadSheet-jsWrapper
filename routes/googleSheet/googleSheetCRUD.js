@@ -47,7 +47,7 @@ const addDataToSpreadSheet = async (sheetCode, startPos, data) => {
 
                     reject(err);
                 } else {
-                    logger.info("WRITE 처리완료 SheetID: " + sheetCode);
+                    // logger.info("WRITE 처리완료 SheetID: " + sheetCode);
                     resolve(result);
                 }
             }
