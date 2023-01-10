@@ -21,8 +21,8 @@ router.post("/crud", async (req, res, next) => {
             break;
         case "write":
             console.log("접속");
-            const spreadSheet = await init(sheetCode);
-            await addDataToSpreadSheet(spreadSheet, cellRange, jsonData)
+            // const spreadSheet = await init(sheetCode);
+            await addDataToSpreadSheet(sheetCode, cellRange, jsonData)
                 .then(() => {
                     res.send("성공");
                 })
