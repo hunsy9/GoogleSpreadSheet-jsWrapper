@@ -20,7 +20,9 @@ router.post("/crud", async (req, res, next) => {
             });
             break;
         case "write":
+            console.log("접속");
             const spreadSheet = await init(sheetCode);
+            console.log("init은 성공");
             await addDataToSpreadSheet(spreadSheet, cellRange, jsonData)
                 .then(() => {
                     res.send("성공");
