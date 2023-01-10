@@ -1,10 +1,7 @@
-const { json } = require("body-parser");
 const { google } = require("googleapis");
 const fs = require("fs");
 const jwt = require("./Config/initialFunc");
-const backOff = require("exponential-backoff");
 const logger = require("../../logConfig/logConfig");
-const { rejects } = require("assert");
 
 //create parameters = {doc,sheetId}
 const makeNewMemberSheet = async (doc, generatedSheetId) => {

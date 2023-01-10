@@ -5,7 +5,6 @@ const {
     addDataToSpreadSheet,
 } = require("./googleSheetCRUD");
 const { init, create } = require("./Config/connect");
-const { apiLimiter } = require("./ApiLimitation/rateLimit");
 const logger = require("./../../logConfig/logConfig");
 
 //parameter {option}
