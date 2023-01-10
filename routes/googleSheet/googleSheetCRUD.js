@@ -19,6 +19,7 @@ const addDataToSpreadSheet = async (spreadSheet, cellRange, jsonData) => {
             startColumnIndex: startColumnIndex,
             endColumnIndex: endColumnIndex,
         });
+        console.log("셀 로드 성공");
 
         for (let i = startRowIndex; i < endRowIndex; i++) {
             for (let j = startColumnIndex; j < endColumnIndex; j++) {
