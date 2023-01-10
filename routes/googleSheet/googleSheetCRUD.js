@@ -1,7 +1,7 @@
 const { google } = require("googleapis");
 const fs = require("fs");
 const jwt = require("./Config/initialFunc");
-const logger = require("../../logConfig/logConfig");
+// const logger = require("../../logConfig/logConfig");
 
 //create parameters = {doc,sheetId}
 const makeNewMemberSheet = async (doc, generatedSheetId) => {

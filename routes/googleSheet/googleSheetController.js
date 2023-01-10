@@ -5,11 +5,9 @@ const {
     addDataToSpreadSheet,
 } = require("./googleSheetCRUD");
 const { init, create } = require("./Config/connect");
-const logger = require("./../../logConfig/logConfig");
 
 //parameter {option}
-router.post("/crud", apiLimiter, async (req, res, next) => {
-    // res.setHeader("Access-Control-Allow-Origin", "*");
+router.post("/crud", async (req, res, next) => {
     const option = req.query.option;
     const { sheetCode, startPos, data } = req.body;
     switch (option) {
