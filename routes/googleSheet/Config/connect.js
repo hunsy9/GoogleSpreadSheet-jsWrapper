@@ -14,7 +14,18 @@ let init = async (sheetCode) => {
 };
 
 const create = async () => {
-    const title = "EZSTEAM 데이터 분석";
+    var today = new Date();
+
+    var year = today.getFullYear();
+    var month = ("0" + (today.getMonth() + 1)).slice(-2);
+    var day = ("0" + today.getDate()).slice(-2);
+    var hours = ("0" + today.getHours()).slice(-2);
+    var minutes = ("0" + today.getMinutes()).slice(-2);
+    var seconds = ("0" + today.getSeconds()).slice(-2);
+    var dateString = year + "-" + month + "-" + day;
+    var timeString = hours + ":" + minutes + ":" + seconds;
+
+    const title = "EZSTEAM 데이터 분석 " + dateString + " " + timeString;
     const auth = jwt;
     const service = google.sheets({ version: "v4", auth });
     const resource = {

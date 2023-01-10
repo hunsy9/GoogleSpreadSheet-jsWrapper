@@ -11,8 +11,8 @@ const app = express();
 const serviceRouter = require("./routes/service");
 
 // view engine setup
-app.set("views", path.join(__dirname, "views"));
-app.set("view engine", "jade");
+app.set("views", "./views");
+app.set("view engine", "ejs");
 
 app.use(
     cors({
@@ -27,7 +27,7 @@ app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/service", serviceRouter);
 app.get("/", (req, res) => {
-    res.render("index", { title: "hi" });
+    // res.render("index", { title: "hi"
     res.send("Welcome");
 });
 
@@ -47,8 +47,8 @@ app.use(function (err, req, res, next) {
     res.render("error");
 });
 
-app.listen(9000, function () {
-    console.log("Server is running on port " + 9000);
+app.listen(9443, function () {
+    console.log("Server is running on port " + 9443);
 });
 
 module.exports = app;

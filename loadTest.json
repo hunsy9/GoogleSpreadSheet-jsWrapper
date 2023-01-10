@@ -1,0 +1,24 @@
+{
+    "config": {
+        "target": "http://localhost:9000",
+        "phases": [
+            {
+                "duration": 20,
+                "arrivalRate": 2
+            }
+        ]
+    },
+    "scenarios": [
+        {
+            "flow": [
+                {
+                    "post": {
+                        "url": "/service/google/crud?option=create",
+
+                        "json": {}
+                    }
+                }
+            ]
+        }
+    ]
+}
