@@ -1,10 +1,6 @@
 const whitelist = [
-    "https://haict.onthe.live:3000",
-    "https://haict.onthe.live:80",
-    "https://haict.onthe.live:443",
-    "http://haict.onthe.live:3000",
-    "http://haict.onthe.live:80",
-    "http://haict.onthe.live:443",
+    "https://haict.onthe.live",
+    "http://haict.onthe.live",
     "http://localhost:3000",
 ];
 
