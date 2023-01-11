@@ -8,12 +8,11 @@ const makeNewMemberSheet = async (doc, generatedSheetId) => {
     return new Promise(async (resolve, reject) => {
         const newSheet = await doc.addSheet(async (err) => {
             if (err) {
-                logger.error("/POST:CREATE    |     " + err.message);
+                logger.error("CREATE 오류    |     " + err.message);
                 reject(err);
             } else {
-                const newSheet = await doc.addSheet();
-                resolve(newSheet);
                 logger.info("CREATE 처리완료 SheetID: " + generatedSheetId);
+                resolve();
             }
         });
         resolve(newSheet);
@@ -35,16 +34,15 @@ const addDataToSpreadSheet = async (sheetCode, startPos, data) => {
                     values: data,
                 },
             },
-            (err, result, sheetCode) => {
+            (err, result) => {
                 if (err) {
                     // Handle error
                     logger.error(
-                        '/POST:WRITE , sheetID: "' +
+                        'WRITE 오류 , sheetID: "' +
                             sheetCode +
                             '"   |    ' +
                             err.message
                     );
-
                     reject(err);
                 } else {
                     logger.info("WRITE 처리완료 SheetID: " + sheetCode);
