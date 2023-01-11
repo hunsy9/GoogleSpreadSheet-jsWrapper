@@ -6,7 +6,7 @@ const logger = require("../../logConfig/logConfig");
 //create parameters = {doc,sheetId}
 const makeNewMemberSheet = async (doc, generatedSheetId) => {
     return new Promise(async (resolve, reject) => {
-        const newSheet = await doc.addSheet(async (err, generatedSheetId) => {
+        const newSheet = await doc.addSheet(async (err) => {
             if (err) {
                 logger.error("/POST:CREATE    |     " + err.message);
                 reject(err);
