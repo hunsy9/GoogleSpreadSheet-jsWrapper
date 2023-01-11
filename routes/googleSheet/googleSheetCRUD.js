@@ -6,15 +6,16 @@ const logger = require("../../logConfig/logConfig");
 //create parameters = {doc,sheetId}
 const makeNewMemberSheet = async (doc, generatedSheetId) => {
     return new Promise(async (resolve, reject) => {
-        const newSheet = await doc.addSheet(async (err) => {
-            if (err) {
-                logger.error("CREATE 오류    |     " + err.message);
-                reject(err);
-            } else {
+        const newSheet = await doc
+            .addSheet()
+            .then(() => {
                 logger.info("CREATE 처리완료 SheetID: " + generatedSheetId);
                 resolve();
-            }
-        });
+            })
+            .catch((err) => {
+                logger.error("CREATE 오류    |     " + err.message);
+                reject(err);
+            });
         resolve(newSheet);
     });
 };
