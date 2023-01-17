@@ -16,7 +16,7 @@ app.set("views", "./views");
 app.set("view engine", "ejs");
 app.engine("ejs", require("ejs").__express);
 app.use(cors({ origin: true }));
-app.use(cors(corsOptions));
+// app.use(cors(corsOptions));
 app.use(logger("dev"));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
