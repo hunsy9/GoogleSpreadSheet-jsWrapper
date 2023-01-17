@@ -30,7 +30,7 @@ const addDataToSpreadSheet = async (sheetCode, startPos, data) => {
                 includeValuesInResponse: true,
                 spreadsheetId: sheetCode,
                 range: startPos,
-                valueInputOption: "RAW",
+                valueInputOption: "USER_ENTERED",
                 requestBody: {
                     values: data,
                 },
